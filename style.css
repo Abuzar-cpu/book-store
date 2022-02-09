@@ -91,7 +91,7 @@ footer
     font-size: 50px;
 }
 
-#sendButton{
+#sendButton, #searchButton{
     transition: all 0.5s;
     border: none;
     background-color: orange;
@@ -100,6 +100,10 @@ footer
 }
 
 #sendButton:hover{
+    color: #871214;
+}
+
+#searchButton:hover{
     color: #871214;
 }
 
@@ -112,4 +116,12 @@ footer
     transition: all;
     transition-duration: 0.8;
     cursor: pointer;
+}
+
+/*Search page starts from here*/
+
+#found{
+    background-color: #871214;
+    color: #fff;
+    height: fit-content;
 }

@@ -62,8 +62,9 @@ $("#addButton").on('click', () => {
     let imageUrl = $("#imageURL").val().toString().trim(); 
     let description = $("#description").val().toString().trim();
     let publishDate = $("#pubDate").val();
+    let type = $("#bookType").val();
 
-    // console.log($("#bookType").val());
+    console.log($("#bookType").val());
     if(name != "" && author != "" && imageUrl != "" && description != "")
     {
         $("#bookName").val("");
@@ -77,6 +78,7 @@ $("#addButton").on('click', () => {
             imageUrl,
             description,
             publishDate,
+            type,
             isNew
         });
     }
