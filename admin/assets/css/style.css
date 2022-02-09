@@ -2,6 +2,11 @@ body{
     height: fit-content;
 }
 
+*::selection{
+    background-color: #871214;
+    color: #fff;
+}
+
 /*Navbar design*/
 #navbar
 {

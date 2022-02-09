@@ -2,6 +2,13 @@
 
 import { ref, db, set, push, onValue, remove } from '../admin/assets/js/firebase.js';
 
+let snap;
+let bookFound = false;
+onValue(ref(db, "/books"), (snapshot) => {
+    snap = snapshot;
+});
+
+
 $("#sendButton").on('click', () => {
     let name = $("#name").val();
     let address = $("#address").val();
@@ -39,3 +46,53 @@ $("#joinBookBtn").on("click", () => {
         $("#joinBookEmail").val("");
     }
 });
+
+
+let search = () =>
+{
+    bookFound = false;
+    $("#found").html("");
+    let books = snap.val();
+    if($("#searchingFor").val() == "")
+    {    
+        $("#found").append($("<p>Search field can't be empty.</p>"));
+
+        return;
+    }
+
+    let bookIds = Object.entries(books);
+
+    let searchedFor = $("#searchingFor").val();
+    
+    for(let book of bookIds)
+    {
+        if(book[1].name.toLowerCase() == searchedFor)
+        {
+            let author = $("<p>");
+            let description = $("<p>");
+            let name = $("<p>");
+            let something = $("<p>");
+            let pubDate = $("<p>");
+            
+            name.text("Name: " + book[1].name);
+            description.text("description: " + book[1].description);
+            author.text("Author: " + book[1].author);
+            something.text("Something: " + book[1].something);
+            pubDate.text("Publish date: " + book[1].publishDate);
+
+            $("#found").append(name, author, something, description, pubDate, $("<hr>"));
+
+            $("#searchingFor").val("");
+            bookFound = true;
+        }
+    }
+
+    if(!bookFound)
+    {
+        $("#found").text("Couldn't find the book you've searched for");
+    }
+    return;
+
+}
+
+$("#searchButton").on('click', search);
