@@ -46,8 +46,6 @@ $("#joinBookBtn").on("click", () => {
         $("#joinBookEmail").val("");
     }
 });
-
-
 let search = () =>
 {
     bookFound = false;
@@ -96,3 +94,17 @@ let search = () =>
 }
 
 $("#searchButton").on('click', search);
+
+
+/**
+ * For dynamic about page
+ */
+
+ onValue(ref(db, "/about"), (snapshot) => 
+ {
+     let data = snapshot.val();
+     $("#header").text(data.header);
+     $("#about").text(data.about);
+     $("#bookImage").attr('src', data.url)
+ });
+ 
