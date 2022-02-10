@@ -108,3 +108,42 @@ $("#searchButton").on('click', search);
      $("#bookImage").attr('src', data.url)
  });
  
+/**
+ * For dynamic home page
+ */
+
+onValue(ref(db, "/categories"), (snapshot) => {
+    $("#catalog-home-list").empty();
+    let data = snapshot.val();
+    
+    for(var type of Object.entries(data))
+    {
+        let div1 = $("<div class='col-md-4 mb-4'>");
+        let div2 = $("<div class='card shadow cursor-pointer py-3'></div>");
+        let div3 = $("<div class='card-body'>");
+        let h4 = $("<h4 class='card-title m-0 text-center h5 font-weight-bold'>" + type[1].type + "</h4>");
+
+        div1.append(div2);
+        div2.append(div3);
+        div3.append(h4);
+
+        $("#catalog-home-list").append(div1);
+    }
+});
+
+onValue(ref(db, "/aboutHome"), (snapshot) => {
+    $("#homeAbout").empty();
+    let data = snapshot.val();
+    for(var numbers of Object.entries(data))
+    {
+        let div1 = $("<div class='col-3' id='category'>");
+        let div2 = $("<div class='d-flex align-items-center'>");
+        let div3 = $("<div class='display-4 font-weight-bolder mr-4'>" + numbers[1] + "</div>");
+        let div4 = $("<div class='h6'>" + numbers[0] + "</div>");
+
+        div1.append(div2);
+        div2.append(div3, div4);
+
+        $("#homeAbout").append(div1);
+    }
+});
