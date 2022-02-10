@@ -143,7 +143,7 @@ onValue(ref(db, "/aboutHome"), (snapshot) => {
     let data = snapshot.val();
     for(var numbers of Object.entries(data))
     {
-        let div1 = $("<div class='col-3' id='category'>");
+        let div1 = $("<div class='col-md-3 col-12' id='category'>");
         let div2 = $("<div class='d-flex align-items-center'>");
         let div3 = $("<div class='display-4 font-weight-bolder mr-4'>" + numbers[1] + "</div>");
         let div4 = $("<div class='h6'>" + numbers[0] + "</div>");
