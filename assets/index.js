@@ -92,6 +92,29 @@ $("#searchButton").on('click', search);
      $("#bookImage").attr('src', data.url)
  });
  
+
+let setBookFromSearch = (bookName, description, imageUrl, pubdate) => {
+
+    let mainDiv = $("<div class='card mb-3 mt-3' style='max-width: 540px;'>");
+    let secondaryDiv = $("<div class='row g-0'>");
+    let imgDiv = $("<div class='col-md-4 d-flex'>");
+    let img = $("<img src='" + imageUrl + "' class='img-fluid rounded-start' alt='Book Cover'>");
+
+    let cardBodyContainer = $("<div class='col-md-8'>");
+    let cardBody = $("<div class='card-body'>");
+    let h5 = $("<h5 class='card-title'>" + bookName +"</h5>");
+    let desc = $("<p class='card-text'>" + description + "</p>");
+    let pubDate = $("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>");
+
+    mainDiv.append(secondaryDiv);
+    secondaryDiv.append(imgDiv, cardBodyContainer);
+    imgDiv.append(img);
+    cardBodyContainer.append(cardBody);
+    cardBody.append(h5, desc, pubDate);
+
+    return mainDiv;
+}
+
 /**
  * For dynamic home page
  */
@@ -131,38 +154,3 @@ onValue(ref(db, "/aboutHome"), (snapshot) => {
         $("#homeAbout").append(div1);
     }
 });
-let setBookFromSearch = (bookName, description, imageUrl, pubdate) => {
-    // <div class="card mb-3" style="max-width: 540px;">
-    //     <div class="row g-0">
-    //       <div class="col-md-4">
-    //         <img src="..." class="img-fluid rounded-start" alt="...">
-    //       </div>
-    //       <div class="col-md-8">
-    //         <div class="card-body">
-    //           <h5 class="card-title">Card title</h5>
-    //           <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    //           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    //         </div>
-    //       </div>
-    //     </div>
-    // </div>
-
-    let mainDiv = $("<div class='card mb-3 mt-3' style='max-width: 540px;'>");
-    let secondaryDiv = $("<div class='row g-0'>");
-    let imgDiv = $("<div class='col-md-4 d-flex'>");
-    let img = $("<img src='" + imageUrl + "' class='img-fluid rounded-start' alt='Book Cover'>");
-
-    let cardBodyContainer = $("<div class='col-md-8'>");
-    let cardBody = $("<div class='card-body'>");
-    let h5 = $("<h5 class='card-title'>" + bookName +"</h5>");
-    let desc = $("<p class='card-text'>" + description + "</p>");
-    let pubDate = $("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>");
-
-    mainDiv.append(secondaryDiv);
-    secondaryDiv.append(imgDiv, cardBodyContainer);
-    imgDiv.append(img);
-    cardBodyContainer.append(cardBody);
-    cardBody.append(h5, desc, pubDate);
-
-    return mainDiv;
-}
