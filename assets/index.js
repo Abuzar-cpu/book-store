@@ -49,11 +49,11 @@ $("#joinBookBtn").on("click", () => {
 let search = () =>
 {
     bookFound = false;
-    $("#found").html("");
+    $("#resultContainer").empty();
     let books = snap.val();
     if($("#searchingFor").val() == "")
     {    
-        $("#found").append($("<p>Search field can't be empty.</p>"));
+        $("#resultContainer").append($("<p class='mt-3'>Search field can't be empty.</p>"));
 
         return;
     }
@@ -65,32 +65,16 @@ let search = () =>
     for(let book of bookIds)
     {
         if(book[1].name.toLowerCase() == searchedFor)
-        {
-            let author = $("<p>");
-            let description = $("<p>");
-            let name = $("<p>");
-            let something = $("<p>");
-            let pubDate = $("<p>");
-            
-            name.text("Name: " + book[1].name);
-            description.text("description: " + book[1].description);
-            author.text("Author: " + book[1].author);
-            something.text("Something: " + book[1].something);
-            pubDate.text("Publish date: " + book[1].publishDate);
-
-            $("#found").append(name, author, something, description, pubDate, $("<hr>"));
+        {            
+            $("#resultContainer").append(setBookFromSearch( book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate));
 
             $("#searchingFor").val("");
-            bookFound = true;
+            return;
         }
     }
-
-    if(!bookFound)
-    {
-        $("#found").text("Couldn't find the book you've searched for");
-    }
+    
+    $("#resultContainer").append($("<p class='mt-3' id='found'>Couldn't find the book you've searched for</p>"));
     return;
-
 }
 
 $("#searchButton").on('click', search);
@@ -108,6 +92,29 @@ $("#searchButton").on('click', search);
      $("#bookImage").attr('src', data.url)
  });
  
+
+let setBookFromSearch = (bookName, description, imageUrl, pubdate) => {
+
+    let mainDiv = $("<div class='card mb-3 mt-3' style='max-width: 540px;'>");
+    let secondaryDiv = $("<div class='row g-0'>");
+    let imgDiv = $("<div class='col-md-4 d-flex'>");
+    let img = $("<img src='" + imageUrl + "' class='img-fluid rounded-start' alt='Book Cover'>");
+
+    let cardBodyContainer = $("<div class='col-md-8'>");
+    let cardBody = $("<div class='card-body'>");
+    let h5 = $("<h5 class='card-title'>" + bookName +"</h5>");
+    let desc = $("<p class='card-text'>" + description + "</p>");
+    let pubDate = $("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>");
+
+    mainDiv.append(secondaryDiv);
+    secondaryDiv.append(imgDiv, cardBodyContainer);
+    imgDiv.append(img);
+    cardBodyContainer.append(cardBody);
+    cardBody.append(h5, desc, pubDate);
+
+    return mainDiv;
+}
+
 /**
  * For dynamic home page
  */
@@ -147,3 +154,4 @@ onValue(ref(db, "/aboutHome"), (snapshot) => {
         $("#homeAbout").append(div1);
     }
 });
+
