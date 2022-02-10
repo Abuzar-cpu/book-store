@@ -227,12 +227,25 @@ let removeBook = () =>
  * Deletes the user that joined
  */
 
-// let removeUser = (user) => {
-//     let userId = $(user).data("id");
-//     console.log("removing:", userId);
-//     remove(ref(db, "/joinedUsers" + userId));
-// }
+let removeUser = (user) => {
+    if(confirm("Selected user will be deleted permanently. Continue?"))
+    {
+        let userId = $(user).data("id");
+        remove(ref(db, "/joinedUsers/" + userId));
+    }
+}
 
+/**
+ * Deletes the user that Contacted
+ */
+
+ let removeContact = (user) => {
+    if(confirm("Selected user will be deleted permanently. Continue?"))
+    {
+        let userId = $(user).data("id");
+        remove(ref(db, "/contact/" + userId));
+    }
+}
 /**
  * onValue method for join.html file
  */
@@ -250,9 +263,9 @@ onValue(ref(db, "/joinedUsers"), (snapshot) => {
         let head = $("<th scope='row'>" + num + "</th>");
         let td1 = $("<td>" + user[1].fullName + "</td>");
         let td2 = $("<td>" + user[1].email + "</td>");
-        // let removeButton = $("<button data-id='" + user[0] + "' onclick='removeUser(this)'>Remove User</button>");
+        let removeButton = $("<td><button id='removeButton' data-id='" + user[0] + "' onclick='removeUser(this)'>Remove User</button></td>");
 
-        tr.append(head, td1, td2);
+        tr.append(head, td1, td2, removeButton);
         $("#table-body").append(tr);
         num++;
     }
@@ -275,8 +288,9 @@ onValue(ref(db, "/contact"), (snapshot) => {
         let td2 = $("<td>" + user[1].address + "</td>");
         let td3 = $("<td>" + user[1].email + "</td>");
         let td4 = $("<td>" + user[1].phone + "</td>");
+        let removeButton = $("<td><button id='removeButton' data-id='" + user[0] + "' onclick='removeContact(this)'>Remove User</button></td>");
 
-        tr.append(head, td1, td2, td3, td4);
+        tr.append(head, td1, td2, td3, td4, removeButton);
         $("#contact-table").append(tr);
         num++;
     }
@@ -303,4 +317,7 @@ window.removeBook = removeBook;
 window.search = search;
 
 //@ts-ignore
-// window.removeUser = removeUser;
+window.removeUser = removeUser;
+
+//@ts-ignore
+window.removeContact = removeContact;

@@ -87,12 +87,12 @@ body{
     color: #fff;
 }
 
-#addType:hover{
+#addButton:hover, #search:hover, #addType:hover{
     color: #871214;
 }
 
-#addButton:hover, #search:hover{
-    color: #871214;
+#removeButton:hover{
+    color: red;
 }
 
 #search{
@@ -109,8 +109,9 @@ body{
     border-bottom-left-radius: 10px;
 }
 
-#removeBook, #close
+#removeBook, #close, #removeButton
 {
+    transition: all 0.5s;
     border: none;
     background-color: orange;
     padding: 0.2vw 2vh;
