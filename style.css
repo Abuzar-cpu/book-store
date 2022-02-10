@@ -125,3 +125,7 @@ footer
     color: #fff;
     height: fit-content;
 }
+
+#category{
+    cursor: pointer;
+}
