@@ -130,7 +130,3 @@ footer
 #resultContainer{
     box-shadow: 0px 8px 5px #888, 0px -8px 5px #888;
 }
-
-#foundBookDescription{
-    overflow: auto;
-}

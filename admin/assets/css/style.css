@@ -91,12 +91,13 @@ body{
     color: #871214;
 }
 
-#addButton:hover{
+#addButton:hover, #search:hover{
     color: #871214;
 }
 
 #search{
     position: absolute;
+    transition: all 0.5s;
     right: 10px;
     border: none;
     background-color: orange;

@@ -92,21 +92,8 @@ $("#searchButton").on('click', search);
      $("#bookImage").attr('src', data.url)
  });
  
+
 let setBookFromSearch = (bookName, description, imageUrl, pubdate) => {
-    // <div class="card mb-3" style="max-width: 540px;">
-    //     <div class="row g-0">
-    //       <div class="col-md-4">
-    //         <img src="..." class="img-fluid rounded-start" alt="...">
-    //       </div>
-    //       <div class="col-md-8">
-    //         <div class="card-body">
-    //           <h5 class="card-title">Card title</h5>
-    //           <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    //           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    //         </div>
-    //       </div>
-    //     </div>
-    // </div>
 
     let mainDiv = $("<div class='card mb-3 mt-3' style='max-width: 540px;'>");
     let secondaryDiv = $("<div class='row g-0'>");
@@ -127,3 +114,44 @@ let setBookFromSearch = (bookName, description, imageUrl, pubdate) => {
 
     return mainDiv;
 }
+
+/**
+ * For dynamic home page
+ */
+
+onValue(ref(db, "/categories"), (snapshot) => {
+    $("#catalog-home-list").empty();
+    let data = snapshot.val();
+    
+    for(var type of Object.entries(data))
+    {
+        let div1 = $("<div class='col-md-4 mb-4'>");
+        let div2 = $("<div class='card shadow cursor-pointer py-3'></div>");
+        let div3 = $("<div class='card-body'>");
+        let h4 = $("<h4 class='card-title m-0 text-center h5 font-weight-bold'>" + type[1].type + "</h4>");
+
+        div1.append(div2);
+        div2.append(div3);
+        div3.append(h4);
+
+        $("#catalog-home-list").append(div1);
+    }
+});
+
+onValue(ref(db, "/aboutHome"), (snapshot) => {
+    $("#homeAbout").empty();
+    let data = snapshot.val();
+    for(var numbers of Object.entries(data))
+    {
+        let div1 = $("<div class='col-3' id='category'>");
+        let div2 = $("<div class='d-flex align-items-center'>");
+        let div3 = $("<div class='display-4 font-weight-bolder mr-4'>" + numbers[1] + "</div>");
+        let div4 = $("<div class='h6'>" + numbers[0] + "</div>");
+
+        div1.append(div2);
+        div2.append(div3, div4);
+
+        $("#homeAbout").append(div1);
+    }
+});
+
