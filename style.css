@@ -123,5 +123,14 @@ footer
 #found{
     background-color: #871214;
     color: #fff;
+    padding: 1vh 2vw;
     height: fit-content;
+}
+
+#resultContainer{
+    box-shadow: 0px 8px 5px #888, 0px -8px 5px #888;
+}
+
+#foundBookDescription{
+    overflow: auto;
 }

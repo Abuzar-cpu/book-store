@@ -49,11 +49,11 @@ $("#joinBookBtn").on("click", () => {
 let search = () =>
 {
     bookFound = false;
-    $("#found").html("");
+    $("#resultContainer").empty();
     let books = snap.val();
     if($("#searchingFor").val() == "")
     {    
-        $("#found").append($("<p>Search field can't be empty.</p>"));
+        $("#resultContainer").append($("<p class='mt-3'>Search field can't be empty.</p>"));
 
         return;
     }
@@ -65,32 +65,16 @@ let search = () =>
     for(let book of bookIds)
     {
         if(book[1].name.toLowerCase() == searchedFor)
-        {
-            let author = $("<p>");
-            let description = $("<p>");
-            let name = $("<p>");
-            let something = $("<p>");
-            let pubDate = $("<p>");
-            
-            name.text("Name: " + book[1].name);
-            description.text("description: " + book[1].description);
-            author.text("Author: " + book[1].author);
-            something.text("Something: " + book[1].something);
-            pubDate.text("Publish date: " + book[1].publishDate);
-
-            $("#found").append(name, author, something, description, pubDate, $("<hr>"));
+        {            
+            $("#resultContainer").append(setBookFromSearch( book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate));
 
             $("#searchingFor").val("");
-            bookFound = true;
+            return;
         }
     }
-
-    if(!bookFound)
-    {
-        $("#found").text("Couldn't find the book you've searched for");
-    }
+    
+    $("#resultContainer").append($("<p class='mt-3' id='found'>Couldn't find the book you've searched for</p>"));
     return;
-
 }
 
 $("#searchButton").on('click', search);
@@ -108,3 +92,38 @@ $("#searchButton").on('click', search);
      $("#bookImage").attr('src', data.url)
  });
  
+let setBookFromSearch = (bookName, description, imageUrl, pubdate) => {
+    // <div class="card mb-3" style="max-width: 540px;">
+    //     <div class="row g-0">
+    //       <div class="col-md-4">
+    //         <img src="..." class="img-fluid rounded-start" alt="...">
+    //       </div>
+    //       <div class="col-md-8">
+    //         <div class="card-body">
+    //           <h5 class="card-title">Card title</h5>
+    //           <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    //           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    //         </div>
+    //       </div>
+    //     </div>
+    // </div>
+
+    let mainDiv = $("<div class='card mb-3 mt-3' style='max-width: 540px;'>");
+    let secondaryDiv = $("<div class='row g-0'>");
+    let imgDiv = $("<div class='col-md-4 d-flex'>");
+    let img = $("<img src='" + imageUrl + "' class='img-fluid rounded-start' alt='Book Cover'>");
+
+    let cardBodyContainer = $("<div class='col-md-8'>");
+    let cardBody = $("<div class='card-body'>");
+    let h5 = $("<h5 class='card-title'>" + bookName +"</h5>");
+    let desc = $("<p class='card-text'>" + description + "</p>");
+    let pubDate = $("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>");
+
+    mainDiv.append(secondaryDiv);
+    secondaryDiv.append(imgDiv, cardBodyContainer);
+    imgDiv.append(img);
+    cardBodyContainer.append(cardBody);
+    cardBody.append(h5, desc, pubDate);
+
+    return mainDiv;
+}
