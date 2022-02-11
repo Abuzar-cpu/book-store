@@ -1,17 +1,4 @@
-::selection {
-    background: #720418;
-    color: #ffffff;
-}
-*::-moz-selection {
-    background: #720418;
-    color: #ffffff;
-}
-*::-webkit-selection {
-    background: #720418;
-    color: #ffffff;
-}
-
-*{
+body{
     color: #1D1102;
 }
 
@@ -22,10 +9,7 @@
 .nav a {
   text-decoration: none;
 }
-.cursor-pointer:hover{
-    cursor:pointer;
-    pointer-events: auto;
-}
+
 .line {
   background-color: #720418;
   width: 25px;
@@ -77,21 +61,17 @@ footer
 
 .fa-facebook:hover{
     color: #4064ac;
-    -moz-transition: all 0.5s ease;
-    transition: all 0.5s ease;
 }
 
 .fa-twitter:hover{
     color: #1c9cea;
-    -moz-transition: all 0.5s ease;
-    transition: all 0.5s ease;
 }
 
 .fa-instagram:hover{
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     -webkit-background-clip: text;
             /* Also define standard property for compatibility */
-    background-clip: text;
+            background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -100,17 +80,18 @@ footer
     background-color: #FF8B00;
 }
 
+#joinBookBtn:hover{
+    color: #871214;
+}
+
 
 /*Contact page style starts here*/
 #contact-text{
     color: #000;
-
     font-size: 50px;
-
-    font-size: 30px;  /* Semra elave eledi*/
-
 }
-#sendButton{
+
+#sendButton, #searchButton{
     transition: all 0.5s;
     border: none;
     background-color: orange;
@@ -118,7 +99,13 @@ footer
     color: #fff;
 }
 
+#sendButton:hover{
+    color: #871214;
+}
 
+#searchButton:hover{
+    color: #871214;
+}
 
 .list-group-item{
     color: #fff;
@@ -128,126 +115,22 @@ footer
 .fab{
     transition: all;
     transition-duration: 0.8;
-    cursor: pointer;}
+    cursor: pointer;
+}
 
-input /* Semra elave eledi*/
-{
-    border: 1px solid rgb(150, 148, 148) ;
-    border-radius: 5px;
-}
-/*Catalog page style starts here*/
-.book-catalog
-{
-    list-style: none;
-}
-.nav-link{
-    border: none;
-    background-color: transparent;
-    color: 1D1102;
-}
-.card
-{
+/*Search page starts from here*/
+
+#found{
+    background-color: #871214;
+    color: #fff;
+    padding: 1vh 2vw;
     height: fit-content;
-    /* margin-right: 60px; */
 }
 
-.card img{
-    height: 150px;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 4px;
+#resultContainer{
+    box-shadow: 0px 8px 5px #888, 0px -8px 5px #888;
 }
 
-.card .new-book {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    z-index: 1;
-    display: inline-block;
-    padding: 4px;
-    background: #DC3545;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 12px;
-    padding: 5px;
-  }
-
-
-button.slick-arrow {
-    border: none !important;
-    background: none !important;
-  }
-button.slick-arrow img {
-    width: 50px;
-    height: 50px;
-  }
- button.slick-prev {
-    position: absolute;
-    left: -60px;
-    top: 50%;
-    transform: translateY(-50%);
-    outline: none;
-  }
- button.slick-next {
-    position: absolute;
-    right: -60px;
-    top: 50%;
-    transform: translateY(-50%);
-    outline: none;
-  }
- button.slick-prev-header {
-    position: absolute;
-    left: -50px;
-    top: 50%;
-    transform: translateY(-50%);
-    outline: none;
-  }
- button.slick-next-header {
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    outline: none;
-  }
-.slick-dots{
-    display: none !important;
+#foundBookDescription{
+    overflow: auto;
 }
-.readButton{
-    transition: all 0.5s;
-    border: none;
-    background-color: orange;
-    padding: 1vw 2vh;
-    color: #fff;
-    width: 100%;
-    font-size: 12px;
-}
-.all-books h2,.follow h2{
-    font-size: 1.5rem;
-}
-
-/* Read more page style */
-.back-btn{
-    width: 70px;
-    height: 35px;
-    color: white;
-    border-radius: 10px !important; /* alinmadi */
-    margin-bottom: 70px;
-    display: block;
-}
-.back-btn .fa-caret-left{
-    color: white;
-}
-.year{
-    background-color: #207eca;
-    color: #fff;
-    padding: 4px;
-    border-radius:10px ;
-    font-size: 12px;
-    font-weight: bold;
-}
-.img-fluid {
-    width:100%;
-    height:auto;
-    object-fit:cover;
-    object-position:50% 50%;
-   }
