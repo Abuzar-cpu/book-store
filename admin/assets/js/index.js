@@ -2,6 +2,25 @@
 
 import { ref, db, set, push, onValue, remove } from './firebase.js';
 
+
+var clicks = 0;
+$("#toggle").on("click", function () {
+    clicks++
+    if(clicks ==1 || clicks % 2 == 1 ){
+        $("#navbar").hide();
+        $("#useless").hide();
+        $("#home").removeClass("col-9");
+        $("#home").addClass("col-12");
+    }else{
+          $("#navbar").show();
+          $("#useless").show();
+          $("#home").removeClass("col-12");
+          $("#home").addClass("col-9");
+    }
+    console.log(clicks);
+});
+
+
 /**
  * Checks if the user logged in in the current session
  * if not: redirects the user to the login page
@@ -263,7 +282,7 @@ onValue(ref(db, "/joinedUsers"), (snapshot) => {
         let head = $("<th scope='row'>" + num + "</th>");
         let td1 = $("<td>" + user[1].fullName + "</td>");
         let td2 = $("<td>" + user[1].email + "</td>");
-        let removeButton = $("<td><button id='removeButton' data-id='" + user[0] + "' onclick='removeUser(this)'>Remove User</button></td>");
+        let removeButton = $("<td><button class='rounded' id='removeButton' data-id='" + user[0] + "' onclick='removeUser(this)'>Remove User</button></td>");
 
         tr.append(head, td1, td2, removeButton);
         $("#table-body").append(tr);
@@ -288,7 +307,7 @@ onValue(ref(db, "/contact"), (snapshot) => {
         let td2 = $("<td>" + user[1].address + "</td>");
         let td3 = $("<td>" + user[1].email + "</td>");
         let td4 = $("<td>" + user[1].phone + "</td>");
-        let removeButton = $("<td><button id='removeButton' data-id='" + user[0] + "' onclick='removeContact(this)'>Remove User</button></td>");
+        let removeButton = $("<td><button class='rounded' id='removeButton' data-id='" + user[0] + "' onclick='removeContact(this)'>Remove User</button></td>");
 
         tr.append(head, td1, td2, td3, td4, removeButton);
         $("#contact-table").append(tr);
