@@ -49,7 +49,7 @@ $("#joinBookBtn").on("click", () => {
 let search = () =>
 {
     bookFound = false;
-    $("#resultContainer").empty();
+    $("#searchSpinner").attr('src', "./assets/img/Spinner-1s-200px.gif");
     let books = snap.val();
     if($("#searchingFor").val() == "")
     {    
@@ -65,7 +65,8 @@ let search = () =>
     for(let book of bookIds)
     {
         if(book[1].name.toLowerCase() == searchedFor)
-        {            
+        {        
+            $("#resultContainer").empty();  
             $("#resultContainer").append(setBookFromSearch( book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate));
 
             $("#searchingFor").val("");
