@@ -147,7 +147,6 @@ let sort = (category) => {
         if(book[1].isNew)
         {
             bookHTML = "<div data-type='"+book[1].type+"' class='card col-3 text-center p-3 shadow position-relative mr-5'><span class='new-book'>New</span><img src='"+book[1].imageUrl+"' /><div class='card-body'><p><strong>"+book[1].name+"</strong></p><p>"+book[1].author+"</p><button class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
-            // console.log("This one is new")
         }
         else{
             bookHTML = "<div data-type='"+book[1].type+"' class='card col-3 text-center p-3 shadow position-relative mr-5'><img src='"+book[1].imageUrl+"' /><div class='card-body'><p><strong>"+book[1].name+"</strong></p><p>"+book[1].author+"</p><button class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
@@ -186,7 +185,6 @@ onValue(ref(db, "/books"), (snapshot) => {
         if(book[1].isNew)
         {
             bookHTML = "<div data-id='"+book[0]+"' data-type='"+book[1].type+"' class='card col-3 text-center p-3 shadow position-relative mr-5'><span class='new-book'>New</span><img src='"+book[1].imageUrl+"' /><div class='card-body'><p><strong>"+book[1].name+"</strong></p><p>"+book[1].author+"</p><button  class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
-            // console.log("This one is new")
             $("#new-release").append($(bookHTML));
         }
         else{
@@ -211,7 +209,6 @@ onValue(ref(db, "/books"), (snapshot) => {
 function ReadMore(){
     $(".read-more").on("click", function () {
 
-        // console.log("Read more");
         $(".catalog-header").css("display", "none");
         $(".general-carousel").css("display", "none");
         $(".read-more-page").css("display", "block");
@@ -222,12 +219,10 @@ function ReadMore(){
                 let bookHTML;
                
                 let bookId = $(this).closest(".card").attr("data-id");
-                // console.log(bookId);
-
                 for(let book of Object.entries(data))
                 {
                     $("#read-more-main").empty();
-                    // console.log(book)
+                    
                     if(book[0]===bookId)
                     {
                         bookHTML = '<div class="col-6 p-3" ><button class="back-btn btn-primary"> <i class="fa fa-caret-left" aria-hidden="true"></i> Back </button><span class="year">'+book[1].publishDate+'</span> <h2>'+book[1].name+' </h2> <h4>'+book[1].author+'</h4> <p>'+book[1].description+'</p>  </div><div class="col-5 "> <img src="'+book[1].imageUrl+'" class="img-fluid shadow rounded" alt=""> </div> ';
@@ -253,10 +248,6 @@ function ReadMoreQuit(){
             $(".read-more-page").css("display", "none");
     });
 }
-
-// $("#readMoreSearch").on('click', () => {
-//     console.log("Read More");
-// });
 
 //@ts-ignore
 window.goToCatalog = goToCatalog;

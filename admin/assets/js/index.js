@@ -6,7 +6,7 @@ import { ref, db, set, push, onValue, remove } from './firebase.js';
 var clicks = 0;
 $("#toggle").on("click", function () {
     clicks++
-    if(clicks ==1 || clicks % 2 == 1 ){
+    if(clicks == 1 || clicks % 2 == 1 ){
         $("#navbar").hide();
         $("#useless").hide();
         $("#home").removeClass("col-9");
@@ -17,7 +17,6 @@ $("#toggle").on("click", function () {
           $("#home").removeClass("col-12");
           $("#home").addClass("col-9");
     }
-    console.log(clicks);
 });
 
 
@@ -83,7 +82,6 @@ $("#addButton").on('click', () => {
     let publishDate = $("#pubDate").val();
     let type = $("#bookType").val();
 
-    console.log($("#bookType").val());
     if(name != "" && author != "" && imageUrl != "" && description != "")
     {
         $("#bookName").val("");
@@ -145,9 +143,9 @@ jQuery(() =>{
 let search = () =>
 {
     found = false;
-    $("#found").html("");
+    $("#found").empty();
     let books = snap.val();
-    // console.log(books);
+    
     if($("#searchingFor").val() == "")
     {    
         $("#found").append($("<p>Search field can't be empty.</p>"));
@@ -212,12 +210,6 @@ let search = () =>
     }
 
 }
-// function close()
-// {
-//     console.log("Closing");
-//     $("#found").empty();
-//     $("#found").hide();
-// }
 
 let removeBook = () =>
 {
@@ -323,37 +315,6 @@ onValue(ref(db, "/categories"), (snapshot) => {
     }
 });
 
-onValue(ref(db, "/books"), (snapshot) => {
-    let data = snapshot.val();
-
-    for(let book of Object.entries(data))
-    {
-        $("#books").append(setBookFromSearch( book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate, book[0] ));
-    }
-});
-
-let setBookFromSearch = (bookName, description, imageUrl, pubdate, bookID) => {
-
-    let mainDiv = $("<div class='card mb-3 mt-3' style='max-width: 540px;'>");
-    let secondaryDiv = $("<div class='row g-0'>");
-    let imgDiv = $("<div class='col-md-4 d-flex'>");
-    let img = $("<img src='" + imageUrl + "' class='img-fluid rounded-start' alt='Book Cover'>");
-
-    let cardBodyContainer = $("<div class='col-md-8'>");
-    let cardBody = $("<div class='card-body'>");
-    let h5 = $("<h5 class='card-title'>" + bookName +"</h5>");
-    let desc = $("<p class='card-text'>" + description + "</p>");
-    let pubDate = $("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>");
-
-    let readMore = $("<button data-id='"+bookID+"' onclick='deleteBook(this)' class='btn-primary'>Remove Book</button>")
-    mainDiv.append(secondaryDiv);
-    secondaryDiv.append(imgDiv, cardBodyContainer);
-    imgDiv.append(img);
-    cardBodyContainer.append(cardBody);
-    cardBody.append(h5, desc, pubDate, readMore);
-
-    return mainDiv;
-}
 
 function deleteBook(element) {
     if(confirm("Book will be deleted permanently. Continue?"))
