@@ -25,6 +25,8 @@ $("#sendButton").on('click', () => {
     
     if(name != "" && address != "" && email != "" && number != "")
     {
+        $(".alert-danger").hide();
+        $(".alert-success").show();
         let userPush = push(ref(db, "/contact"));
         set(userPush, {
             address,
@@ -32,10 +34,16 @@ $("#sendButton").on('click', () => {
             fullName: name,
             phone: number
         });
+
+        $("#name").val("");
+        $("#address").val("");
+        $("#email").val("");
+        $("#number").val("");
     }
 
     else{
-        alert("Please fill the form correctly")
+        $(".alert-danger").show();
+        $(".alert-success").hide();
     }
 });
 
@@ -46,6 +54,8 @@ $("#joinBookBtn").on("click", () => {
 
     if(name != "" && email != "")
     {
+        $(".alert-danger").hide();
+        $(".alert-success").show();
         let joinPush = push(ref(db, "/joinedUsers"));
         set(joinPush, {
             fullName: name,
@@ -55,6 +65,11 @@ $("#joinBookBtn").on("click", () => {
         $("#joinBookFullName").val("");
         
         $("#joinBookEmail").val("");
+    }
+
+    else{
+        $(".alert-success").hide();
+        $(".alert-danger").show();
     }
 });
 
@@ -207,6 +222,11 @@ onValue(ref(db, "/aboutHome"), (snapshot) => {
         $("#homeAbout").append(div1);
     }
 });
+
+let unsetStatus = () => {
+    $(".alert-success").hide();
+    $(".alert-danger").hide();
+}
 
 //@ts-ignore
 window.goToCatalog = goToCatalog;

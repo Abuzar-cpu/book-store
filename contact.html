@@ -73,24 +73,34 @@
         
         <div class="row mt-3">
             <div class="col-md-6 col-12">
-                <input style="font-size: 20px;" class="p-4 w-100" id="name" placeholder="Full Name"/>
+                <input style="font-size: 20px;" class="p-4 w-100" id="name" placeholder="Full Name" required/>
             </div>
 
             <div class="col-md-6 col-12">
-                <input style="font-size: 20px;" class="p-4 w-100" id="email" placeholder="Email" type="email"/>
+                <input style="font-size: 20px;" class="p-4 w-100" id="email" placeholder="Email" type="email" required/>
             </div>
 
             <div class="col-md-6 col-12 mt-3">
-                <input style="font-size: 20px;" class="p-4 w-100" id="address" placeholder="Address" />
+                <input style="font-size: 20px;" class="p-4 w-100" id="address" placeholder="Address" required/>
             </div>
 
             <div class="col-md-6 col-12 mt-3">
-                <input style="font-size: 20px;" class="p-4 w-100" id="number" type="number" placeholder="Phone Number"/>
+                <input style="font-size: 20px;" class="p-4 w-100" id="number" type="number" placeholder="Phone Number" required/>
             </div>
         </div>
 
         <div class="container-fluid row mt-3">
             <button style="font-size: 20px;" class="py-3 rounded" id="sendButton">Send</button>
+        </div>
+        <div class="alert alert-danger mt-4 join-error text-center" role="alert" style="display: none;">
+            <h4 class="alert-heading">Error</h4>
+            <p></p>
+            <p class="mb-0"><strong>Please check form</strong></p>
+        </div>
+        <div class="alert alert-success mt-4 join-success text-center" role="alert" style="display: none;">
+            <h4 class="alert-heading">Successful</h4>
+            <p></p>
+            <p class="mb-0"><strong>Thanks. We will contact with you as soon as possible</strong></p>
         </div>
         
         <div class="container mb-5">
@@ -103,6 +113,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <footer class="container-fluid p-5">

@@ -35,7 +35,7 @@
                         <li class="nav-item"><a href="./contact.html" class="nav-link text-dark ">Contact Us</a></li>
                         <li class="nav-item"><a href="./search.html" class="nav-link text-dark">Search </a></li>
                     </ul>
-                    <div class="btn d-flex align-items-center" data-toggle="modal" data-target="#exampleModal"> <img
+                    <div onclick="unsetStatus()" class="btn d-flex align-items-center" data-toggle="modal" data-target="#exampleModal"> <img
                             src="./assets/icon/user.svg" alt=""> <span class="ml-1 mt-1"> Join </span> </div>
                 </div>
             </div>
@@ -48,9 +48,9 @@
                     <div class="h1 modal-title mb-4 font-weight-bold text-center">Join Us</div>
                     <form method="post">
                         <div class="form-group "> <input type="text" placeholder="Full Name"
-                                class="form-control form-control-lg" id="joinBookFullName"> </div>
+                                class="form-control form-control-lg" id="joinBookFullName" required> </div>
                         <div class="form-group my-4"> <input type="email" placeholder="Email"
-                                class="form-control form-control-lg" id="joinBookEmail"> </div><button id="joinBookBtn"
+                                class="form-control form-control-lg" id="joinBookEmail" required> </div><button id="joinBookBtn"
                             type="button" class="btn bg-orange btn-lg text-white btn-block btn-primary">Join</button>
                         <div class="alert alert-danger mt-4 join-error" role="alert" style="display: none;">
                             <h4 class="alert-heading">Error</h4>
