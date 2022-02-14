@@ -6,7 +6,7 @@ import { ref, db, set, push, onValue, remove } from './firebase.js';
 var clicks = 0;
 $("#toggle").on("click", function () {
     clicks++
-    if(clicks ==1 || clicks % 2 == 1 ){
+    if(clicks == 1 || clicks % 2 == 1 ){
         $("#navbar").hide();
         $("#useless").hide();
         $("#home").removeClass("col-9");
@@ -17,7 +17,6 @@ $("#toggle").on("click", function () {
           $("#home").removeClass("col-12");
           $("#home").addClass("col-9");
     }
-    console.log(clicks);
 });
 
 
@@ -83,7 +82,6 @@ $("#addButton").on('click', () => {
     let publishDate = $("#pubDate").val();
     let type = $("#bookType").val();
 
-    console.log($("#bookType").val());
     if(name != "" && author != "" && imageUrl != "" && description != "")
     {
         $("#bookName").val("");
@@ -145,9 +143,9 @@ jQuery(() =>{
 let search = () =>
 {
     found = false;
-    $("#found").html("");
+    $("#found").empty();
     let books = snap.val();
-    console.log(books);
+    
     if($("#searchingFor").val() == "")
     {    
         $("#found").append($("<p>Search field can't be empty.</p>"));
@@ -212,12 +210,6 @@ let search = () =>
     }
 
 }
-// function close()
-// {
-//     console.log("Closing");
-//     $("#found").empty();
-//     $("#found").hide();
-// }
 
 let removeBook = () =>
 {
@@ -323,6 +315,14 @@ onValue(ref(db, "/categories"), (snapshot) => {
     }
 });
 
+
+function deleteBook(element) {
+    if(confirm("Book will be deleted permanently. Continue?"))
+    {
+        remove(ref(db, "/books/" + $(element).data("id")));
+    }
+}
+
 //@ts-ignore
 window.logout = logout;
 
@@ -340,3 +340,6 @@ window.removeUser = removeUser;
 
 //@ts-ignore
 window.removeContact = removeContact;
+
+//@ts-ignore
+window.deleteBook = deleteBook;

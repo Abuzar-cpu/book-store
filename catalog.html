@@ -3,8 +3,8 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,28 +16,30 @@
     <!-- Main Css -->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg" href="./assets/icon/logo.svg" />
+
+    <script src="./assets/catalog.js" type="module" defer></script>
+    <script src="./assets/index.js" type="module" defer></script>
     <title>Catalog | Library Book Store</title>
 </head>
 
 <body>
     <header class="bg-white">
-        <div class="container">
+        <div class="container ">
             <div class="navbar navbar-expand-lg mt-3 px-0">
                 <a class="navbar-brand" href="#"> <img src="./assets/icon/logo-color.svg" alt=""> </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                    <span class="line"></span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+                        <span class="navbar-toggler-icon" >
+                            <i class="fas fa-bars" style="color:#720418; font-size:28px;"></i>
+                        </span>   
+                    
                 </button>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav w-100 justify-content-center ">
+                <div class="collapse navbar-collapse text-center" id="navbarNavAltMarkup">
+                    <ul class=" w-100 justify-content-center navbar-nav ">
                         <li class="nav-item"><a href="./index.html" class="nav-link text-dark">Home</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-dark active"> Catalog</a></li>
+                        <li class="nav-item"><a href="catalog.html" class="nav-link text-dark active"> Catalog</a></li>
                         <li class="nav-item"><a href="./about.html" class="nav-link text-dark">About Store</a></li>
                         <li class="nav-item"><a href="./contact.html" class="nav-link text-dark ">Contact Us</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-dark">Search </a></li>
+                        <li class="nav-item"><a href="./search.html" class="nav-link text-dark">Search </a></li>
                     </ul>
                     <div class="btn d-flex align-items-center" data-toggle="modal" data-target="#exampleModal"> <img
                             src="./assets/icon/user.svg" alt=""> <span class="ml-1 mt-1"> Join </span> </div>
@@ -75,52 +77,15 @@
         <div class="catalog-carousel">
             <div class="catalog-header mb-5">
                 <div class="container">
-                    <div class="row">
+                    <div class="row justify-content-between">
                         <h2 class='col-3'>All Boooks</h2>
+                        <div class="col-8">
+                            <div class=" book-catalog d-flex flex-row">
+                                <ul class="nav p-4" id="categories">
 
-                        <ul class="col-8 book-catalog catalog-header-carousel justify-content-evenly nav ">
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Fantastic</button>
-                            </li>
-                            <li class="nav-item  col-4">
-                                <button class="nav-link">Best Seller</button>
-                            </li>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Comedy</button>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Fantastic</button>
-                            </li>
-                            <li class="nav-item  col-4">
-                                <button class="nav-link">Best Seller</button>
-                            </li>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Comedy</button>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Fantastic</button>
-                            </li>
-                            <li class="nav-item  col-4">
-                                <button class="nav-link">Best Seller</button>
-                            </li>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Comedy</button>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Fantastic</button>
-                            </li>
-                            <li class="nav-item  col-4">
-                                <button class="nav-link">Best Seller</button>
-                            </li>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Comedy</button>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Fantastic</button>
-                            </li>
-                            <li class="nav-item  col-4">
-                                <button class="nav-link">Best Seller</button>
-                            </li>
-                            <li class="nav-item col-4">
-                                <button class="nav-link">Comedy</button>
-                            </li>
-                        </ul>
+                                </ul>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -129,219 +94,42 @@
                 <div class="container">
                     <div class=" all-books tab-content ">
                         <div class="container">
-                            <div class="row catalog-page-carousel justify-content-around  ">
+                            <div class="row catalog-page-carousel justify-content-around  " id="all-books">
 
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
 
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water1 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block  readButton "
-                                            type="button">Read More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water2 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton ">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water3 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water4 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton ">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water5 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton ">Read
-                                            More</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="bestseller-carousel carousel my-5  ">
                             <h2 class="text-center mb-5">Best Seller</h2>
-                            <div class="row catalog-page-carousel justify-content-around ">
-
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water1 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water2 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water3 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water4 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water5 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
+                            <div class="row catalog-page-carousel justify-content-around  " id="best-seller">
                             </div>
                         </div>
                         <div class="new-releases-carousel carousel my-5">
                             <h2 class="text-center mb-5">New Release</h2>
-                            <div class="row catalog-page-carousel justify-content-around ">
+                            <div class="row catalog-page-carousel justify-content-around " id="new-release">
 
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
 
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water1 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water2 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water3 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water4 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
-                                <div class="card col-3 text-center p-3 shadow position-relative mr-5">
-
-                                    <span class="new-book">New</span>
-                                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1411059576i/23209924._SX50_.jpg"
-                                        alt="The Water Knife" />
-                                    <div class="card-body">
-                                        <p> <strong>Water5 ..dsasdasdasdasds</strong> </p>
-                                        <p>Paolo Baci..</p>
-                                        <button class="read-more btn btn-primary text-white btn-block readButton">Read
-                                            More</button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="read-more-page  " style="display: none;">
+            <div class="read-more-page " style="display: none;">
                 <div class="container">
-                    <div class="row justify-content-between ">
-                        <div class="col-6 p-3">
-                            <button class="back-btn btn-primary "> <i class="fa fa-caret-left" aria-hidden="true"></i> Back </button>
+                    <div class="row justify-content-between " id="read-more-main">
+                        <!-- <div class="col-6 p-3">
+                            <button class="back-btn btn-primary "> <i class="fa fa-caret-left" aria-hidden="true"></i>
+                                Back </button>
                             <span class="year">2014</span>
                             <h2>İkinci Addım: Həqiqətin Beş Adı</h2>
                             <h4>Qaraqan</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas
+                            </p>
 
                         </div>
                         <div class="col-5 ">
                             <img src="./assets/img/da-vinci-code.jpg" class="img-fluid shadow rounded" alt="">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -362,10 +150,10 @@
     <footer class="container-fluid p-5">
         <div class="container">
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6 col-12">
                     <img src="./assets/icon/logo-group.svg" alt="">
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-12">
                     <div class="row">
                         <div class="col-4">
                             <ul class="list-group list-group-flush">
@@ -408,107 +196,11 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <!-- SLICK CAROUSEL CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" ></script>
+
     <!-- font awsome  -->
     <script src="https://kit.fontawesome.com/72fc72c8e8.js" crossorigin="anonymous"></script>
 
-    <script>
-        $(".read-more").on("click", function () {
-            $(".catalog-header").css("display", "none");
-            $(".general-carousel").css("display", "none");
-            $(".read-more-page").css("display", "block");
-        })
-        $(".read-more-page .back-btn").on("click", function () {
-            $(".catalog-header").css("display", "block");
-            $(".general-carousel").css("display", "block");
-            $(".read-more-page").css("display", "none");
-        })
-        // READ MORE PAGE 
-        $("")
-        // Slick codes below
-
-        $(document).ready(function () {
-            $(".catalog-page-carousel").slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 1000,
-                arrows: true,
-                prevArrow: "<button type='button' class='slick-prev slick-arrow'><img src='./assets/icon/prevArrow.svg'/></button>",
-                nextArrow: "<button type='button' class='slick-next slick-arrow'><img   src='./assets/icon/nextArrow.svg'/></button>",
-                responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-
-                    }
-                }
-                ]
-            });
-        });
-        $(document).ready(function () {
-            $(".catalog-header-carousel").slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                arrows: true,
-                prevArrow: "<button type='button' class='slick-prev-header slick-arrow'> <img src='./assets/icon/caret-left-solid.svg' style='height: 35px; width: 35px; '/></button>",
-                nextArrow: "<button type='button' class='slick-next-header slick-arrow'><img src='./assets/icon/caret-right-solid.svg' style='height: 35px; width: 35px;'/> </button>",
-                responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                    }
-                },
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        dots: false
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-                ]
-            });
-        });
-    </script>
 </body>
 
 </html>
