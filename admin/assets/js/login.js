@@ -46,4 +46,12 @@ let setStatus = (before, actualStatus, message) => {
     $("#status").addClass(actualStatus);
     $("#status").html(message);
 }
+
+window.onkeyup = (e) => {
+    if(e.key == "Enter")
+    {
+        login();
+    }
+}
+
 window.login = login;
