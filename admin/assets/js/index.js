@@ -30,12 +30,12 @@ let loggedIn = !(window.sessionStorage.getItem("loggedin") == null);
 let isNew = false;
 
 if (!loggedIn) {
-    window.location.replace("/admin/login.html");
+    window.location.replace("./login.html");
 }
 
 let logout = () => {
     window.sessionStorage.clear();
-    window.location.replace("/admin/login.html");
+    window.location.replace("./login.html");
 }
 
 $("#isNew").on('click', () => {
