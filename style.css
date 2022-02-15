@@ -298,9 +298,14 @@ button.slick-arrow img {
 }
 
 #resultContainer{
+    overflow: auto;
     box-shadow: 0px 8px 5px #888, 0px -8px 5px #888;
 }
 
 #foundBookDescription{
-    overflow: auto;
+    overflow: hidden;
+}
+
+#description{
+    overflow: hidden;
 }

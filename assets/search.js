@@ -1,42 +1,27 @@
+//@ts-check
+
 import { ref, db, set, push, onValue, remove } from '../admin/assets/js/firebase.js';
 
 let bookFound = false;
-let snap;
+let books;
 
 onValue(ref(db, "/books"), (snapshot) => {
-    snap = snapshot;
+    setTimeout(() => {books = Object.entries(snapshot.val()); console.log("Ready")}, 2000);
 });
 
 let search = () => {
     $("#resultContainer").empty();
-    bookFound = false;
-    $("#searchSpinner").show();
-    $("#searchSpinner").attr('src', "./assets/img/Spinner-1s-200px.gif");
-    let books = snap.val();
-    // if($("#searchingFor").val() == "")
-    // {
-    //     $("#resultContainer").empty();
-    //     $("#resultContainer").append($("<p class='mt-3'>Search field can't be empty.</p>"));
-    //     $("#searchSpinner").hide();
-    //     return;
-    // }
-
-    let bookIds = Object.entries(books);
-
     let searchedFor = $("#searchingFor").val();
+    // @ts-ignore
+    let filtered = books.filter((book) => book[1].name.toLowerCase().includes(searchedFor.toLowerCase()));
 
-    for (let book of bookIds) {
-        if (book[1].name.toLowerCase() == searchedFor.toLowerCase()) {
-            $("#resultContainer").empty();
-            $("#resultContainer").append(setBookFromSearch(book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate, book[0]));
+    filtered.map(book => setBookFromSearch(book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate, book[0]));
 
-            $("#searchingFor").val("");
-            return;
-        }
+    if($("#resultContainer").html() == "")
+    {
+        let p = $("<p>Sorry, no book found</p>");
+        $("#resultContainer").append(setBookFromSearch("Sorry", "No book found for your search", "https://images.unsplash.com/photo-1609743522653-52354461eb27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80", "Please search later"));
     }
-
-    $("#resultContainer").append($("<p class='mt-3' id='found'>Couldn't find the book you've searched for</p>"));
-    return;
 }
 
 $("#searchButton").on('click', search);
@@ -44,7 +29,6 @@ $("#searchButton").on('click', search);
 
 
 let setBookFromSearch = (bookName, description, imageUrl, pubdate, ID) => {
-
     let mainDiv = $("<div class='card mb-3 mt-3' style='max-width: 540px;'>");
     let secondaryDiv = $("<div class='row g-0'>");
     let imgDiv = $("<div class='col-md-4 d-flex'>");
@@ -53,15 +37,21 @@ let setBookFromSearch = (bookName, description, imageUrl, pubdate, ID) => {
     let cardBodyContainer = $("<div class='col-md-8'>");
     let cardBody = $("<div class='card-body'>");
     let h5 = $("<h5 class='card-title'>" + bookName + "</h5>");
-    let desc = $("<p class='card-text'>" + description + "</p>");
-    let pubDate = $("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>");
+    let desc = $("<p class='card-text'id='description'> " + description + "</p>");
 
     let readMore = ('<button data-id="' + ID + '" onclick="ReadMore(this)" class="btn-primary">Read More</button>')
     mainDiv.append(secondaryDiv);
     secondaryDiv.append(imgDiv, cardBodyContainer);
     imgDiv.append(img);
     cardBodyContainer.append(cardBody);
-    cardBody.append(h5, desc, pubDate, readMore);
+    cardBody.append(h5, desc);
+    if(ID != undefined)
+    {
+        cardBody.append($("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>"));
+        cardBody.append(readMore);
+    }
+    $("#resultContainer").append(mainDiv);
+
     return mainDiv;
 }
 
