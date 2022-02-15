@@ -6,16 +6,16 @@ import { ref, db, set, push, onValue, remove } from './firebase.js';
 var clicks = 0;
 $("#toggle").on("click", function () {
     clicks++
-    if(clicks == 1 || clicks % 2 == 1 ){
+    if (clicks == 1 || clicks % 2 == 1) {
         $("#navbar").hide();
         $("#useless").hide();
         $("#home").removeClass("col-9");
         $("#home").addClass("col-12");
-    }else{
-          $("#navbar").show();
-          $("#useless").show();
-          $("#home").removeClass("col-12");
-          $("#home").addClass("col-9");
+    } else {
+        $("#navbar").show();
+        $("#useless").show();
+        $("#home").removeClass("col-12");
+        $("#home").addClass("col-9");
     }
 });
 
@@ -29,24 +29,20 @@ let loggedIn = !(window.sessionStorage.getItem("loggedin") == null);
 
 let isNew = false;
 
-if(!loggedIn)
-{
+if (!loggedIn) {
     window.location.replace("/admin/login.html");
 }
 
-let logout = () =>
-{
+let logout = () => {
     window.sessionStorage.clear();
     window.location.replace("/admin/login.html");
 }
 
 $("#isNew").on('click', () => {
-    if (isNew)
-    {
+    if (isNew) {
         isNew = false;
     }
-    else
-    {
+    else {
         isNew = true;
     }
 });
@@ -58,12 +54,12 @@ $("#isNew").on('click', () => {
 
 $("#addType").on('click', () => {
     let type = $("#type").val();
-    if(type != "")
-    {
+    if (type != "") {
         let typePush = push(ref(db, "/categories"));
         set(typePush, {
             type
         });
+        $("#type").val("")
     }
 });
 
@@ -75,20 +71,21 @@ $("#addButton").on('click', () => {
     let bookBranch = ref(db, "/books");
     let bookPush = push(bookBranch);
 
-    let name = $("#bookName").val().toString().trim(); 
-    let author = $("#authorName").val().toString().trim(); 
-    let imageUrl = $("#imageURL").val().toString().trim(); 
+    let name = $("#bookName").val().toString().trim();
+    let author = $("#authorName").val().toString().trim();
+    let imageUrl = $("#imageURL").val().toString().trim();
     let description = $("#description").val().toString().trim();
     let publishDate = $("#pubDate").val();
     let type = $("#bookType").val();
 
-    if(name != "" && author != "" && imageUrl != "" && description != "")
-    {
+    if (name != "" && author != "" && imageUrl != "" && description != "") {
         $("#bookName").val("");
         $("#authorName").val("");
         $("#imageURL").val("");
         $("#description").val("");
         $("#pubDate").val("");
+        $("#added-danger").hide();
+        $("#added-success").show();
         set(bookPush, {
             name,
             author,
@@ -98,10 +95,12 @@ $("#addButton").on('click', () => {
             type,
             isNew
         });
+        setTimeout(() => { $("#added-success").hide() }, 2300);
     }
-    else
-    {
-        alert("Please fill the form correctly");
+    else {
+        $("#added-danger").show();
+        $("#added-success").hide();
+        setTimeout(() => { $("#added-danger").hide() }, 2300);
     }
 
 });
@@ -109,21 +108,33 @@ $("#addButton").on('click', () => {
 /**
  * Changes about part of the store in firebase
  */
-let changeAbout = () =>
-{
+let changeAbout = () => {
     let header = $("#aboutHeader").val();
     let url = $("#bookImageUrl").val();
     let about = $("#aboutBody").val();
 
-    set(ref(db, "/about"), {
-        header,
-        url,
-        about
-    });
+    if (header != "" && url != "" && about != "") {
+        $("#aboutHeader").val("");
+        $("#aboutBody").val("");
+        $("#bookImageUrl").val("");
 
-    $("#aboutHeader").val("");
-    $("#aboutBody").val("");
-    $("#bookImageUrl").val("");
+        set(ref(db, "/about"), {
+            header,
+            url,
+            about
+        });
+
+        $("#about-danger").hide();
+        $("#about-success").show();
+        setTimeout(() => { $("#about-success").hide() }, 2300);
+    }
+
+    else {
+        $("#about-danger").show();
+        $("#about-success").hide();
+        setTimeout(() => { $("#about-danger").hide() }, 2300);
+    }
+
 }
 
 /**
@@ -134,27 +145,24 @@ let snap;
 let couldBeRemoved = [];
 let found = false;
 
-jQuery(() =>{
+jQuery(() => {
     onValue(ref(db, "/books"), (snapshot) => {
         snap = snapshot;
     });
 });
 
-let search = () =>
-{
+let search = () => {
     found = false;
     $("#found").empty();
     let books = snap.val();
-    
-    if($("#searchingFor").val() == "")
-    {    
+
+    if ($("#searchingFor").val() == "") {
         $("#found").append($("<p>Search field can't be empty.</p>"));
         $("#found").show();
         return;
     }
 
-    else if(books == null)
-    {
+    else if (books == null) {
         $("#found").append($("<p>Database is empty. Please <strong>add book</strong> or <strong>talk to the databse admin</strong> if you think there is a problem.</p>"));
         $("#found").show();
         return;
@@ -164,10 +172,9 @@ let search = () =>
 
     // @type: string
     let searchedFor = $("#searchingFor").val();
-    
-    for(let book of bookIds)
-    {
-        if(book[1].name.toLowerCase() == searchedFor)
+
+    for (let book of bookIds) {
+        if (book[1].name.toLowerCase() == searchedFor)
         // if(book[1].name.toLowerCase() == searchedFor.toLowerCase())
         {
             let author = $("<p>");
@@ -175,7 +182,7 @@ let search = () =>
             let name = $("<p>");
             let something = $("<p>");
             let pubDate = $("<p>");
-            
+
             name.text("Name: " + book[1].name);
             description.text("description: " + book[1].description);
             author.text("Author: " + book[1].author);
@@ -191,16 +198,14 @@ let search = () =>
         }
     }
 
-    if(found)
-    {
+    if (found) {
         // $("#found").empty();
         let removeButton = $("<button onclick='removeBook()' id='removeBook'>Remove this book</button>");
         // let closeButton = $("<button class='ms-3' onclick='close()' id='close'>Close</button>");
         $("#found").append(removeButton);
     }
-    else{
-        while(couldBeRemoved.length != 0)
-        {
+    else {
+        while (couldBeRemoved.length != 0) {
             couldBeRemoved.pop();
         }
         $("#found").empty();
@@ -211,22 +216,18 @@ let search = () =>
 
 }
 
-let removeBook = () =>
-{
+let removeBook = () => {
     let message;
-    if(couldBeRemoved.length > 1)
-    {
+    if (couldBeRemoved.length > 1) {
         message = couldBeRemoved.length + " books will be removed permanently. Continue?";
     }
-    else{
+    else {
         message = "Selected book will be permanently removed. Continue?";
     }
 
     let answer = confirm(message);
-    if(answer)
-    {
-        for(let book of couldBeRemoved)
-        {
+    if (answer) {
+        for (let book of couldBeRemoved) {
             remove(ref(db, "/books/" + book));
         }
         $("#found").hide();
@@ -239,8 +240,7 @@ let removeBook = () =>
  */
 
 let removeUser = (user) => {
-    if(confirm("Selected user will be deleted permanently. Continue?"))
-    {
+    if (confirm("Selected user will be deleted permanently. Continue?")) {
         let userId = $(user).data("id");
         remove(ref(db, "/joinedUsers/" + userId));
     }
@@ -250,9 +250,8 @@ let removeUser = (user) => {
  * Deletes the user that Contacted
  */
 
- let removeContact = (user) => {
-    if(confirm("Selected user will be deleted permanently. Continue?"))
-    {
+let removeContact = (user) => {
+    if (confirm("Selected user will be deleted permanently. Continue?")) {
         let userId = $(user).data("id");
         remove(ref(db, "/contact/" + userId));
     }
@@ -268,8 +267,7 @@ onValue(ref(db, "/joinedUsers"), (snapshot) => {
     let data = snapshot.val();
     let num = 1;
     $("#table-body").empty();
-    for(let user of Object.entries(data))
-    {
+    for (let user of Object.entries(data)) {
         let tr = $("<tr>");
         let head = $("<th scope='row'>" + num + "</th>");
         let td1 = $("<td>" + user[1].fullName + "</td>");
@@ -291,8 +289,7 @@ onValue(ref(db, "/contact"), (snapshot) => {
     let data = snapshot.val();
     let num = 1;
     $("#contact-table").empty();
-    for(let user of Object.entries(data))
-    {
+    for (let user of Object.entries(data)) {
         let tr = $("<tr>");
         let head = $("<th scope='row'>" + num + "</th>");
         let td1 = $("<td>" + user[1].fullName + "</td>");
@@ -309,16 +306,14 @@ onValue(ref(db, "/contact"), (snapshot) => {
 
 onValue(ref(db, "/categories"), (snapshot) => {
     let data = snapshot.val();
-    for(let type of Object.entries(data))
-    {
+    for (let type of Object.entries(data)) {
         $("#bookType").append($("<option selected value=" + type[1].type + ">" + type[1].type + "</option>"));
     }
 });
 
 
 function deleteBook(element) {
-    if(confirm("Book will be deleted permanently. Continue?"))
-    {
+    if (confirm("Book will be deleted permanently. Continue?")) {
         remove(ref(db, "/books/" + $(element).data("id")));
     }
 }

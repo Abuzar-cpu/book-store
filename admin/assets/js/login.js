@@ -6,48 +6,41 @@ let user;
 onValue(ref(db, "/admin"), (snapshot) => {
     let data = snapshot.val();
 
-    if (data != undefined)
-    {
+    if (data != undefined) {
         pass = data.password;
         user = data.username;
     }
 
-    else{
+    else {
         console.log("Error occurred");
     }
 });
 
-let login = () =>
-{
+let login = () => {
     let userEntered = $("#username").val().trim();
     let passEntered = $("#password").val().trim();
 
-    if(user == userEntered)
-    {
-        if(pass == passEntered)
-        {
+    if (user == userEntered) {
+        if (pass == passEntered) {
             window.sessionStorage.setItem("loggedin", true);
             setStatus("alert-danger", "alert-success", "<strong>Login successful</strong>");
-            window.setTimeout(() => {window.location = "/admin/admin.html"}, 800);
+            window.setTimeout(() => { window.location = "/admin/admin.html" }, 800);
             return;
         }
 
-        else
-        {
+        else {
             setStatus("alert-success", "alert-danger", "Unsuccessful! Check your <strong>password</strong> again");
             return;
         }
     }
-    else
-    {
+    else {
         setStatus("alert-success", "alert-danger", "Unsuccessful! Check your <strong>username</strong> again");
         return;
     }
 }
 
 
-let setStatus = (before, actualStatus, message) =>
-{
+let setStatus = (before, actualStatus, message) => {
     // $("#status").empty();
     $("#status").removeClass(before);
     $("#status").addClass(actualStatus);
