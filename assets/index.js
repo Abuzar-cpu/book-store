@@ -24,8 +24,8 @@ $("#sendButton").on('click', () => {
     let number = $("#number").val();
 
     if (name != "" && address != "" && email != "" && number != "") {
-        $(".alert-danger").hide();
-        $(".alert-success").show();
+        $("contact-error").hide();
+        $("#contact-success").show();
         let userPush = push(ref(db, "/contact"));
         set(userPush, {
             address,
@@ -41,8 +41,8 @@ $("#sendButton").on('click', () => {
     }
 
     else {
-        $(".alert-danger").show();
-        $(".alert-success").hide();
+        $("#contact-error").show();
+        $("#contact-success").hide();
     }
 });
 
