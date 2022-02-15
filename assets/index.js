@@ -52,8 +52,8 @@ $("#joinBookBtn").on("click", () => {
     let email = $("#joinBookEmail").val();
 
     if (name != "" && email != "") {
-        $(".alert-danger").hide();
-        $(".alert-success").show();
+        $("#join-error").hide();
+        $("#join-success").show();
         let joinPush = push(ref(db, "/joinedUsers"));
         set(joinPush, {
             fullName: name,
@@ -66,8 +66,8 @@ $("#joinBookBtn").on("click", () => {
     }
 
     else {
-        $(".alert-success").hide();
-        $(".alert-danger").show();
+        $("#join-success").hide();
+        $("#join-error").show();
     }
 });
 
