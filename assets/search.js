@@ -6,13 +6,18 @@ let bookFound = false;
 let books;
 
 onValue(ref(db, "/books"), (snapshot) => {
-    setTimeout(() => {books = Object.entries(snapshot.val()); console.log("Ready")}, 2000);
+    setTimeout(() => {books = Object.entries(snapshot.val()); console.log("Ready")}, 1000);
 });
 
 let search = () => {
     $("#resultContainer").empty();
     let searchedFor = $("#searchingFor").val();
     // @ts-ignore
+    if(books == undefined)
+    {
+        $("#resultContainer").append("Plase try again in a second");
+        return;
+    }
     let filtered = books.filter((book) => book[1].name.toLowerCase().includes(searchedFor.toLowerCase()));
 
     filtered.map(book => setBookFromSearch(book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate, book[0]));

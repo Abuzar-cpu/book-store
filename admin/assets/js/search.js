@@ -6,7 +6,7 @@ let bookFound = false;
 let books;
 
 onValue(ref(db, "/books"), (snapshot) => {
-    setTimeout(() => {books = Object.entries(snapshot.val()); console.log("Ready")}, 2000);
+    setTimeout(() => {books = Object.entries(snapshot.val()); console.log("Ready")}, 1000);
 });
 
 let search = () => {

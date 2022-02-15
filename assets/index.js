@@ -150,6 +150,9 @@ let unsetStatus = () => {
 window.goToCatalog = goToCatalog;
 
 //@ts-ignore
+window.unsetStatus = unsetStatus;
+
+//@ts-ignore
 // window.sort = sort;
 
 //@ts-ignore
