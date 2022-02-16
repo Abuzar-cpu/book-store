@@ -24,7 +24,7 @@ $("#sendButton").on('click', () => {
     let number = $("#number").val();
 
     if (name != "" && address != "" && email != "" && number != "") {
-        $("contact-error").hide();
+        $("#contact-error").hide();
         $("#contact-success").show();
         let userPush = push(ref(db, "/contact"));
         set(userPush, {
@@ -38,11 +38,13 @@ $("#sendButton").on('click', () => {
         $("#address").val("");
         $("#email").val("");
         $("#number").val("");
+        setTimeout(() => $("#contact-success").hide(), 2000)
     }
 
     else {
-        $("#contact-error").show();
         $("#contact-success").hide();
+        $("#contact-error").show();
+        setTimeout(() => $("#contact-error").hide(), 2000);
     }
 });
 
@@ -54,6 +56,7 @@ $("#joinBookBtn").on("click", () => {
     if (name != "" && email != "") {
         $("#join-error").hide();
         $("#join-success").show();
+        setTimeout(() => $("#join-success").hide(), 2000);
         let joinPush = push(ref(db, "/joinedUsers"));
         set(joinPush, {
             fullName: name,
@@ -68,6 +71,7 @@ $("#joinBookBtn").on("click", () => {
     else {
         $("#join-success").hide();
         $("#join-error").show();
+        setTimeout(() => $("#join-error").hide(), 2000);
     }
 });
 
