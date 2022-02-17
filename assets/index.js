@@ -86,7 +86,9 @@ onValue(ref(db, "/about"), (snapshot) => {
 
     $("#about").text(data.about);
 
+    $("#loading").hide();
     $("#bookImage").attr('src', data.url)
+    $("#bookImage").show();
 });
 
 /**

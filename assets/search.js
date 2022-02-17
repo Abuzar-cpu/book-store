@@ -1,30 +1,26 @@
 //@ts-check
 
-import { ref, db, set, push, onValue, remove } from '../admin/assets/js/firebase.js';
-
-let bookFound = false;
+import { ref, db, onValue } from '../admin/assets/js/firebase.js';
 let books;
 
 onValue(ref(db, "/books"), (snapshot) => {
-    setTimeout(() => {books = Object.entries(snapshot.val()); console.log("Ready")}, 1000);
+    setTimeout(() => { books = Object.entries(snapshot.val()); console.log("Ready") }, 1000);
 });
 
 let search = () => {
     $("#resultContainer").empty();
     let searchedFor = $("#searchingFor").val();
     // @ts-ignore
-    if(books == undefined)
-    {
+    if (books == undefined) {
         $("#resultContainer").append("Plase try again in a second");
         return;
     }
+    $("#resultContainer").empty();
     let filtered = books.filter((book) => book[1].name.toLowerCase().includes(searchedFor.toLowerCase()));
 
     filtered.map(book => setBookFromSearch(book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate, book[0]));
 
-    if($("#resultContainer").html() == "")
-    {
-        let p = $("<p>Sorry, no book found</p>");
+    if ($("#resultContainer").html() == "") {
         $("#resultContainer").append(setBookFromSearch("Sorry", "No book found for your search", "https://images.unsplash.com/photo-1609743522653-52354461eb27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80", "Please search later"));
     }
 }
@@ -50,8 +46,7 @@ let setBookFromSearch = (bookName, description, imageUrl, pubdate, ID) => {
     imgDiv.append(img);
     cardBodyContainer.append(cardBody);
     cardBody.append(h5, desc);
-    if(ID != undefined)
-    {
+    if (ID != undefined) {
         cardBody.append($("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>"));
         cardBody.append(readMore);
     }
@@ -65,14 +60,17 @@ function ReadMore(element) {
     let ID = $(element).data("id");
     $("#main").hide();
     $(".col-md-4").hide();
+    let bookData = books;
+    for (let book of bookData) {
+        $("#read-more-main").empty();
 
-    onValue(ref(db, "/books/" + ID), (snapshot) => {
-        let book = snapshot.val();
-        let bookHTML = '<div class="col-6 p-3" ><button class="back-btn btn-primary"> <i class="fa fa-caret-left" aria-hidden="true"></i> Back </button><span class="year">' + book.publishDate + '</span> <h2>' + book.name + ' </h2> <h4>' + book.author + '</h4> <p>' + book.description + '</p>  </div><div class="col-5 "> <img src="' + book.imageUrl + '" class="img-fluid shadow rounded" alt=""> </div> ';
-        $("#read-more-main").append($(bookHTML));
-        ReadMoreQuit();
-    })
-
+        if (book[0] === ID) {
+            let bookHTML = '<div class="col-6 p-3" ><button onclick="ReadMoreQuit()" class="back-btn btn-primary"> <i class="fa fa-caret-left" aria-hidden="true"></i> Back </button><span class="year">' + book[1].publishDate + '</span> <h2>' + book[1].name + ' </h2> <h4>' + book[1].author + '</h4> <p>' + book[1].description + '</p>  </div><div class="col-5 "> <img src="' + book[1].imageUrl + '" class="img-fluid shadow rounded" alt=""> </div> ';
+            $("#read-more-main").append($(bookHTML));
+            break;
+        }
+    };
+    ReadMoreQuit();
     $(".read-more-page").show();
 }
 function ReadMoreQuit() {

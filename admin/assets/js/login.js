@@ -48,8 +48,7 @@ let setStatus = (before, actualStatus, message) => {
 }
 
 window.onkeyup = (e) => {
-    if(e.key == "Enter")
-    {
+    if (e.key == "Enter") {
         login();
     }
 }
