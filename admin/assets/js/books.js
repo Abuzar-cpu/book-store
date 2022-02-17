@@ -42,7 +42,7 @@ window.onkeyup = () => {
     let search = $("#searchingFor").val();
     $("#table-body").empty();
     let num = 0;
-    Object.entries(data).filter((book) => book[1].name.toLowerCase().includes(search.toLowerCase())).map((book) => {$("#table-body").append(setBookFromSearch(++num, book[1].name, book[1].author, book[1].type, book[1].publishDate, book[0]))});
+    Object.entries(data).filter((book) => book[1].name.toLowerCase().includes(search.toLowerCase())).map((book) => { $("#table-body").append(setBookFromSearch(++num, book[1].name, book[1].author, book[1].type, book[1].publishDate, book[0])) });
 }
 
 //@ts-ignore

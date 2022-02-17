@@ -59,12 +59,14 @@
                         <div class="form-group my-4"> <input type="email" placeholder="Email"
                                 class="form-control form-control-lg" id="joinBookEmail"> </div><button id="joinBookBtn"
                             type="button" class="w-100 btn bg-orange btn-lg text-white btn-block">Join</button>
-                        <div class="alert alert-danger mt-4 join-error text-center" id="join-error" role="alert" style="display: none;">
+                        <div class="alert alert-danger mt-4 join-error text-center" id="join-error" role="alert"
+                            style="display: none;">
                             <h4 class="alert-heading">Error</h4>
                             <p></p>
                             <p class="mb-0">Please check the form again</p>
                         </div>
-                        <div class="alert alert-success mt-4 join-success text-center" id="join-success" role="alert" style="display: none;">
+                        <div class="alert alert-success mt-4 join-success text-center" id="join-success" role="alert"
+                            style="display: none;">
                             <h4 class="alert-heading">Successful</h4>
                             <p></p>
                             <p class="mb-0">Welcome to the library</p>
@@ -95,21 +97,20 @@
                 <div class="container">
                     <div class=" all-books tab-content ">
                         <div class="container">
-                            <div class="row catalog-page-carousel justify-content-around  " id="all-books">
-
-
+                            <div class="row catalog-page-carousel justify-content-around" id="all-books">
+                                <div id="loadingAll"><img src="./assets/img/Spinner-1s-200px.gif" /></div>
                             </div>
                         </div>
                         <div class="bestseller-carousel carousel my-5  ">
                             <h2 class="text-center mb-5">Best Seller</h2>
                             <div class="row catalog-page-carousel justify-content-around  " id="best-seller">
+                                <div id="loadingBest"><img src="./assets/img/Spinner-1s-200px.gif" /></div>
                             </div>
                         </div>
                         <div class="new-releases-carousel carousel my-5">
                             <h2 class="text-center mb-5">New Release</h2>
                             <div class="row catalog-page-carousel justify-content-around " id="new-release">
-
-
+                                <div id="loadingNew"><img src="./assets/img/Spinner-1s-200px.gif" /></div>
                             </div>
                         </div>
                     </div>
@@ -118,19 +119,7 @@
             <div class="read-more-page " style="display: none;">
                 <div class="container">
                     <div class="row justify-content-between " id="read-more-main">
-                        <!-- <div class="col-6 p-3">
-                            <button class="back-btn btn-primary "> <i class="fa fa-caret-left" aria-hidden="true"></i>
-                                Back </button>
-                            <span class="year">2014</span>
-                            <h2>İkinci Addım: Həqiqətin Beş Adı</h2>
-                            <h4>Qaraqan</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas
-                            </p>
 
-                        </div>
-                        <div class="col-5 ">
-                            <img src="./assets/img/da-vinci-code.jpg" class="img-fluid shadow rounded" alt="">
-                        </div> -->
                     </div>
                 </div>
             </div>

@@ -321,3 +321,12 @@ button.slick-arrow img {
 #description{
     overflow: hidden;
 }
+
+#loading, #loadingAll, #loadingBest, #loadingNew{
+    display: flex;
+    justify-content: center;
+}
+
+#loading, #loadingAll img, #loadingBest img, #loadingNew img{
+    max-width: 100px;
+}

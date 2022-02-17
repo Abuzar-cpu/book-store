@@ -6,7 +6,7 @@ let bookFound = false;
 let books;
 
 onValue(ref(db, "/books"), (snapshot) => {
-    setTimeout(() => {books = Object.entries(snapshot.val()); console.log("Ready")}, 1000);
+    setTimeout(() => { books = Object.entries(snapshot.val()); console.log("Ready") }, 1000);
 });
 
 let search = () => {
@@ -17,8 +17,7 @@ let search = () => {
 
     filtered.map(book => setBookFromSearch(book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate, book[0]));
 
-    if($("#resultContainer").html() == "")
-    {
+    if ($("#resultContainer").html() == "") {
         console.log("No book");
         let p = $("<p class='text-center'>Sorry, no book found</p>");
         // p.attr("id", "notFound");
@@ -53,8 +52,7 @@ let setBookFromSearch = (bookName, description, imageUrl, pubdate, ID) => {
 
 
 let removeBook = (element) => {
-    if(confirm("THe book will be deleted permanently. Continue?"))
-    {
+    if (confirm("THe book will be deleted permanently. Continue?")) {
         remove(ref(db, "/books/" + $(element).data("id")));
     }
 }
