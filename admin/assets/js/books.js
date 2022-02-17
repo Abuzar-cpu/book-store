@@ -1,34 +1,34 @@
+//@ts-check
+
 import { ref, db, set, push, onValue, remove } from './firebase.js';
-
+let data;
 onValue(ref(db, "/books"), (snapshot) => {
-    let data = snapshot.val();
-
+    data = snapshot.val();
+    let num = 0;
+    $("#table-body").empty();
     for (let book of Object.entries(data)) {
-        $("#books").append(setBookFromSearch(book[1].name, book[1].description, book[1].imageUrl, book[1].publishDate, book[0]));
+        num++;
+        $("#table-body").append(setBookFromSearch(num, book[1].name, book[1].author, book[1].type, book[1].publishDate, book[0]));
     }
 });
 
-let setBookFromSearch = (bookName, description, imageUrl, pubdate, bookID) => {
+let setBookFromSearch = (num, bookName, author, category, pubdate, bookID) => {
 
-    let mainDiv = $("<div class='card mb-3 mt-3' style='max-width: 540px;'>");
-    let secondaryDiv = $("<div class='row g-0'>");
-    let imgDiv = $("<div class='col-md-4 d-flex'>");
-    let img = $("<img src='" + imageUrl + "' class='img-fluid rounded-start' alt='Book Cover'>");
+    // let data = snapshot.val();
+    // let num = 1;
+    let tr = $("<tr>");
+    let head = $("<th scope='row'>" + num + "</th>");
+    let td1 = $("<td>" + bookName + "</td>");
+    let td2 = $("<td>" + author + "</td>");
+    let td3 = $("<td>" + category + "</td>");
+    let td4 = $("<td>" + pubdate + "</td>");
+    let removeButton = $("<td><button class='rounded' id='removeButton' data-id='" + bookID + "' onclick='deleteBook(this)'>Remove Book</button></td>");
 
-    let cardBodyContainer = $("<div class='col-md-8'>");
-    let cardBody = $("<div class='card-body'>");
-    let h5 = $("<h5 class='card-title'>" + bookName + "</h5>");
-    let desc = $("<p class='card-text'>" + description + "</p>");
-    let pubDate = $("<p class='card-text'><small class='text-muted'>Publish date: <strong>" + pubdate + "</strong></small></p>");
+    tr.append(head, td1, td2, td3, td4, removeButton);
+    // $("#table-body").append(tr);
+    // num++;
 
-    let readMore = $("<button data-id='" + bookID + "' onclick='deleteBook(this)' class='btn-primary'>Remove Book</button>")
-    mainDiv.append(secondaryDiv);
-    secondaryDiv.append(imgDiv, cardBodyContainer);
-    imgDiv.append(img);
-    cardBodyContainer.append(cardBody);
-    cardBody.append(h5, desc, pubDate, readMore);
-
-    return mainDiv;
+    return tr;
 }
 
 
@@ -38,4 +38,15 @@ function deleteBook(element) {
     }
 }
 
+window.onkeyup = () => {
+    let search = $("#searchingFor").val();
+    $("#table-body").empty();
+    let num = 0;
+    Object.entries(data).filter((book) => book[1].name.toLowerCase().includes(search.toLowerCase())).map((book) => {$("#table-body").append(setBookFromSearch(++num, book[1].name, book[1].author, book[1].type, book[1].publishDate, book[0]))});
+}
+
+//@ts-ignore
 window.deleteBook = deleteBook;
+
+//@ts-ignore
+// window.search = search;
