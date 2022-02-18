@@ -58,7 +58,7 @@
                                 class="form-control form-control-lg" id="joinBookFullName"> </div>
                         <div class="form-group my-4"> <input type="email" placeholder="Email"
                                 class="form-control form-control-lg" id="joinBookEmail"> </div><button id="joinBookBtn"
-                            type="button" class="w-100 btn bg-orange btn-lg text-white btn-block">Join</button>
+                            type="button" class="w-100 btn bg-orange btn-lg text-white btn-block btn-primary">Join</button>
                         <div class="alert alert-danger mt-4 join-error text-center" id="join-error" role="alert"
                             style="display: none;">
                             <h4 class="alert-heading">Error</h4>
@@ -81,13 +81,14 @@
             <div class="catalog-header mb-5">
                 <div class="container">
                     <div class="row justify-content-between">
-                        <h2 class='col-3'>All Boooks</h2>
+                        <h2 class='col-3 pt-3 text-center'>All Boooks</h2>
                         <div class="col-8">
-                            <div class=" book-catalog d-flex flex-row">
-                                <ul class="nav p-4" id="categories">
+                            <!-- <div class=" book-catalog d-flex flex-row"> -->
+                                <!-- <ul class="nav p-4" id="categories">
 
-                                </ul>
-                            </div>
+                                </ul> -->
+                            <!-- </div> -->
+                            <ul class="nav p-4 book-catalog catalog-header-carousel justify-content-evenly" id="categories"></ul>
                         </div>
 
                     </div>

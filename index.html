@@ -13,6 +13,7 @@
     <link rel="icon" type="image/svg" href="./assets/icon/logo.svg" />
 
     <script src="./assets/index.js" type="module" defer></script>
+    <script src="./assets/dNumbers.js" type="module" defer></script>
     <title>Home | Library Book Store</title>
 </head>
 
@@ -53,7 +54,7 @@
                                 class="form-control form-control-lg" id="joinBookFullName"> </div>
                         <div class="form-group my-4"> <input type="email" placeholder="Email"
                                 class="form-control form-control-lg" id="joinBookEmail"> </div><button id="joinBookBtn"
-                            type="button" class="w-100 btn bg-orange btn-lg text-white btn-block">Join</button>
+                            type="button" class="w-100 btn bg-orange btn-lg text-white btn-block btn-primary">Join</button>
                         <div class="alert alert-danger mt-4 join-error text-center" id="join-error" role="alert"
                             style="display: none;">
                             <h4 class="alert-heading">Error</h4>
@@ -105,29 +106,23 @@
                 <div class="row">
                     <h2 class="col-12 text-center mb-5">About Store</h2>
                     <div class="col-12">
-                        <div class="row">
+                        <div class="row text-center d-flex justify-content-center">
                             <div class="col-md-3 col-12">
                                 <div class="d-flex align-items-center">
-                                    <div class="display-4 font-weight-bolder mr-4">35</div>
-                                    <div class="h6">Branches the country</div>
+                                    <div class="display-4 font-weight-bolder mr-4" id="users"></div>
+                                    <div class="h6">Users</div>
                                 </div>
                             </div>
                             <div class="col-md-3 col-12">
                                 <div class="d-flex align-items-center">
-                                    <div class="display-4 font-weight-bolder mr-4">889</div>
-                                    <div class="h6">Branches the country</div>
+                                    <div class="display-4 font-weight-bolder mr-4" id="bookNum"></div>
+                                    <div class="h6">Books</div>
                                 </div>
                             </div>
                             <div class="col-md-3 col-12">
                                 <div class="d-flex align-items-center">
-                                    <div class="display-4 font-weight-bolder mr-4">8659</div>
-                                    <div class="h6">Branches the country</div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12">
-                                <div class="d-flex align-items-center">
-                                    <div class="display-4 font-weight-bolder mr-4">72</div>
-                                    <div class="h6">Branches the country</div>
+                                    <div class="display-4 font-weight-bolder mr-4" id="types"></div>
+                                    <div class="h6">Book types</div>
                                 </div>
                             </div>
                         </div>

@@ -1,19 +1,26 @@
-::selection {
-    background: #720418;
-    color: #ffffff;
-}
-*::-moz-selection {
-    background: #720418;
-    color: #ffffff;
-}
-*::-webkit-selection {
-    background: #720418;
-    color: #ffffff;
+*::selection{
+    background-color: #871214;
+    color: #fff;
 }
 
-*{
-    color: #1D1102;
-}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #b30000;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7a0202;
+  }
 
 /*Menu style*/
 .nav-item .nav-link{
@@ -27,7 +34,14 @@
 .nav-item .nav-link:hover {
     --d: 100%;
   }
+.nav-link:focus{
+    color: #FF8B00 !important;
+    font-weight: 700;
+    outline: none;
+}
 /*Menu ends here*/
+
+/* Home and General */
 .nav {
   list-style: none;
 }
@@ -111,7 +125,17 @@ footer
 {
     background-color: #FF8B00;
 }
-
+ 
+/* Home page - catalog section  */
+#catalog-home-list  .card:hover {
+    /*  Making button bigger on hover  */
+      transform: scale(1.1) perspective(1px)
+      
+    }
+  
+    #catalog-home-list  .card{
+      transition: all .5s ease-in-out;
+    }
 
 /*Contact page style starts here*/
 #contact-text{
@@ -236,41 +260,73 @@ button.slick-arrow img {
 .all-books h2,.follow h2{
     font-size: 1.5rem;
 }
-/* scrool bar */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #b30000;
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #7a0202;
-  }
-  .book-catalog
-{
-    list-style: none;
-    max-width: 300px;
+
+/* Catalog page card design */
+.catalog-page-carousel .card {
+    max-width: 35ch;
+   padding: 144px 0 0 0;
+    background-size: cover;
+    color: white !important;
+    /* background-image: url(https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg); */
+    transition: transform ease 250ms;
+    border-radius: 0.5rem;
     overflow: hidden;
-    overflow-x: auto;
-    height: 90px;
 }
 
-.book-catalog ul{
-    display: flex !important;
-    min-width: max-content;
-  flex-direction: row !important;
-  font-size: 14px;
-  flex-wrap: nowrap;
+.catalog-page-carousel .card:hover {
+    transform: scale(1.05);
 }
+
+.catalog-page-carousel .card-body {
+    padding: 1.5rem;
+    background: linear-gradient(rgb(0 0 0 / 0),
+            rgb(0 0 0 / 0.25) 15%,
+            rgb(0 0 0 / 1));
+}
+
+
+@media (hover: hover), (prefers-reduced-motion: no-preference) {
+    .catalog-page-carousel .card-body {
+        transform: translateY(60%);
+        transition: transform 500ms ease;
+    }
+
+    .catalog-page-carousel .card:hover .card-body {
+        transform: translateY(0);
+        transition-delay: 500ms;
+    }
+
+    .catalog-page-carousel .card-body>*:not(.card-title) {
+        opacity: 0;
+        transition: opacity 1200ms linear 400ms;
+    }
+
+    .catalog-page-carousel .card:hover .card-body>*:not(.card-title) {
+        opacity: 1;
+    }
+
+    .catalog-page-carousel .card-title::after {
+        content: "";
+        position: absolute;
+        left: -1.5rem;
+        top: 100%;
+        height: 3px;
+        width: calc(100% + 1.5rem);
+        transform: scaleX(0);
+        transition: transform 200ms ease;
+        transform-origin: left;
+    }
+
+    .catalog-page-carousel .card:hover .card-title::after {
+        transition: transform 500ms ease;
+        transform: scaleX(1);
+    }
+}
+
+.catalog-page-carousel .card-title {
+    position: relative;
+    width: max-content;
+  } 
 
 /* Read more page style */
 .back-btn{

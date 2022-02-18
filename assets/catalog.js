@@ -42,7 +42,45 @@ $(document).ready(function () {
         ]
     });
 });
-
+$(document).ready(function () {
+    $(".catalog-header-carousel").slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: true,
+        prevArrow: "<button type='button' class='slick-prev-header slick-arrow'> <img src='./assets/icon/caret-left-solid.svg' style='height: 35px; width: 35px; '/></button>",
+        nextArrow: "<button type='button' class='slick-next-header slick-arrow'><img src='./assets/icon/caret-right-solid.svg' style='height: 35px; width: 35px;'/> </button>",
+        responsive: [{
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                dots: false
+            }
+        },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+        ]
+    });
+});
 function initAllBooks() {
     $("#all-books").slick({
         slidesToShow: 3,
@@ -105,10 +143,10 @@ let sort = (category) => {
     let bookHTML;
     for (let book of Object.entries(data)) {
         if (book[1].isNew) {
-            bookHTML = "<div data-type='" + book[1].type + "' class='card col-3 text-center p-3 shadow position-relative mr-5'><span class='new-book'>New</span><img src='" + book[1].imageUrl + "' /><div class='card-body'><p><strong>" + book[1].name + "</strong></p><p>" + book[1].author + "</p><button class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
+            bookHTML = "<div style='background-image:url(" + book[1].imageUrl + ")' data-id='"+ book[0]+"' data-type='" + book[1].type + "' class='card col-3 text-center  shadow position-relative mr-5'><span class='new-book'>New</span><div class='card-body'><p><strong>" + book[1].name + "</strong></p><p>" + book[1].author + "</p><button class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
         }
         else {
-            bookHTML = "<div data-type='" + book[1].type + "' class='card col-3 text-center p-3 shadow position-relative mr-5'><img src='" + book[1].imageUrl + "' /><div class='card-body'><p><strong>" + book[1].name + "</strong></p><p>" + book[1].author + "</p><button class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
+            bookHTML = "<div style='background-image:url(" + book[1].imageUrl + ")' data-id='"+ book[0]+"' data-type='" + book[1].type + "' class='card col-3 text-center shadow position-relative mr-5'><div class='card-body'><p><strong>" + book[1].name + "</strong></p><p>" + book[1].author + "</p><button class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
         }
 
         if (book[1].type === category) {
@@ -139,17 +177,16 @@ onValue(ref(db, "/books"), (snapshot) => {
     $("#best-seller").empty();
     for (let book of Object.entries(data)) {
         if (book[1].isNew) {
-            bookHTML = "<div data-id='" + book[0] + "' data-type='" + book[1].type + "' class='card col-3 text-center p-3 shadow position-relative mr-5'><span class='new-book'>New</span><img src='" + book[1].imageUrl + "' /><div class='card-body'><p><strong>" + book[1].name + "</strong></p><p>" + book[1].author + "</p><button  class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
+            bookHTML = "<div style='background-image:url(" + book[1].imageUrl + ")' data-id='" + book[0] + "' data-type='" + book[1].type + "' class='card col-3 text-center  shadow position-relative mr-5'><span class='new-book'>New</span><div class='card-body'><p><strong>" + book[1].name + "</strong></p><p>" + book[1].author + "</p><button  class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
             $("#new-release").append($(bookHTML));
         }
         else {
-            bookHTML = "<div data-id='" + book[0] + "' data-type='" + book[1].type + "' class='card col-3 text-center p-3 shadow position-relative mr-5'><img src='" + book[1].imageUrl + "' /><div class='card-body'><p><strong>" + book[1].name + "</strong></p><p>" + book[1].author + "</p><button id='read-more' class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
+            bookHTML = "<div style='background-image:url(" + book[1].imageUrl + ")' data-id='" + book[0] + "' data-type='" + book[1].type + "' class='card col-3 text-center shadow position-relative mr-5'><div class='card-body'><p><strong>" + book[1].name + "</strong></p><p>" + book[1].author + "</p><button id='read-more' class='read-more bt btn-primary text-white btn-block readButton'>Read More</button></div></div>";
         }
 
         if (book[1].type === "Bestseller") {
             $("#best-seller").append($(bookHTML));
         }
-
         $("#all-books").append($(bookHTML));
     }
     ReadMore();
@@ -168,7 +205,7 @@ onValue(ref(db, "/books"), (snapshot) => {
 
 function ReadMore() {
     $(".read-more").on("click", function () {
-
+        
         $(".catalog-header").css("display", "none");
         $(".general-carousel").css("display", "none");
         $(".read-more-page").css("display", "block");
@@ -185,6 +222,7 @@ function ReadMore() {
                 break;
             }
         };
+    
     });
 }
 
