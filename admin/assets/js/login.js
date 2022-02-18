@@ -22,7 +22,7 @@ let login = () => {
 
     if (user == userEntered) {
         if (pass == passEntered) {
-            window.sessionStorage.setItem("loggedin", true);
+            window.localStorage.setItem("loggedin", true);
             setStatus("alert-danger", "alert-success", "<strong>Login successful</strong>");
             window.setTimeout(() => { window.location = "./admin.html" }, 800);
             return;

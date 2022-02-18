@@ -25,7 +25,7 @@ $("#toggle").on("click", function () {
  * if not: redirects the user to the login page
  */
 
-let loggedIn = !(window.sessionStorage.getItem("loggedin") == null);
+let loggedIn = !(window.localStorage.getItem("loggedin") == null);
 
 let isNew = false;
 
@@ -34,7 +34,7 @@ if (!loggedIn) {
 }
 
 let logout = () => {
-    window.sessionStorage.clear();
+    window.localStorage.removeItem("loggedin");
     window.location.replace("./login.html");
 }
 
