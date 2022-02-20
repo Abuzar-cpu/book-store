@@ -241,7 +241,7 @@ function ReadMoreQuit() {
 }
 
 //@ts-ignore
-window.goToCatalog = goToCatalog;
+// window.goToCatalog = goToCatalog;
 
 //@ts-ignore
 window.sort = sort;
