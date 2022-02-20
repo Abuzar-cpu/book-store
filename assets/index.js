@@ -4,12 +4,12 @@
 import { ref, db, set, push, onValue, remove } from '../admin/assets/js/firebase.js';
 // import { sort } from "./catalog.js"
 
-let snap;
+// let snap;
 
-let bookFound = false;
-onValue(ref(db, "/books"), (snapshot) => {
-    snap = snapshot;
-});
+// let bookFound = false;
+// onValue(ref(db, "/books"), (snapshot) => {
+//     snap = snapshot;
+// });
 
 
 

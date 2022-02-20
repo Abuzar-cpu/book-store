@@ -1,5 +1,6 @@
 // import slick from 'slick-carousel';
 import { ref, db, onValue, remove } from '../admin/assets/js/firebase.js';
+
 $(document).ready(function () {
     $(".catalog-page-carousel").slick({
         slidesToShow: 3,
@@ -166,6 +167,37 @@ onValue(ref(db, "/categories"), (snapshot) => {
     $("#categories").slick('refresh');
 });
 
+// Read More
+
+function ReadMore() {
+    $(".read-more").on("click", function () {
+
+        $(".catalog-header").css("display", "none");
+        $(".general-carousel").css("display", "none");
+        $(".read-more-page").css("display", "block");
+        let data = snap.val();
+        let bookHTML;
+
+        let bookId = $(this).closest(".card").attr("data-id");
+        for (let book of Object.entries(data)) {
+            $("#read-more-main").empty();
+
+            if (book[0] === bookId) {
+                bookHTML = '<div class="col-6 p-3" ><button onclick="ReadMoreQuit()" class="back-btn btn-primary"> <i class="fa fa-caret-left" aria-hidden="true"></i> Back </button><span class="year">' + book[1].publishDate + '</span> <h2>' + book[1].name + ' </h2> <h4>' + book[1].author + '</h4> <p>' + book[1].description + '</p>  </div><div class="col-5 "> <img style="max-width: 250px" src="' + book[1].imageUrl + '" class="img-fluid shadow rounded" alt=""> </div> ';
+                $("#read-more-main").append($(bookHTML));
+                break;
+            }
+        };
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 500);
+    });
+}
+
+function ReadMoreQuit() {
+    $(".catalog-header").css("display", "block");
+    $(".general-carousel").css("display", "block");
+    $(".read-more-page").css("display", "none");
+}
+
 onValue(ref(db, "/books"), (snapshot) => {
     let data = snapshot.val();
     snap = snapshot;
@@ -208,37 +240,6 @@ onValue(ref(db, "/books"), (snapshot) => {
     }
     // }
 });
-
-// Read More
-
-function ReadMore() {
-    $(".read-more").on("click", function () {
-
-        $(".catalog-header").css("display", "none");
-        $(".general-carousel").css("display", "none");
-        $(".read-more-page").css("display", "block");
-        let data = snap.val();
-        let bookHTML;
-
-        let bookId = $(this).closest(".card").attr("data-id");
-        for (let book of Object.entries(data)) {
-            $("#read-more-main").empty();
-
-            if (book[0] === bookId) {
-                bookHTML = '<div class="col-6 p-3" ><button onclick="ReadMoreQuit()" class="back-btn btn-primary"> <i class="fa fa-caret-left" aria-hidden="true"></i> Back </button><span class="year">' + book[1].publishDate + '</span> <h2>' + book[1].name + ' </h2> <h4>' + book[1].author + '</h4> <p>' + book[1].description + '</p>  </div><div class="col-5 "> <img style="max-width: 250px" src="' + book[1].imageUrl + '" class="img-fluid shadow rounded" alt=""> </div> ';
-                $("#read-more-main").append($(bookHTML));
-                break;
-            }
-        };
-
-    });
-}
-
-function ReadMoreQuit() {
-    $(".catalog-header").css("display", "block");
-    $(".general-carousel").css("display", "block");
-    $(".read-more-page").css("display", "none");
-}
 
 //@ts-ignore
 // window.goToCatalog = goToCatalog;
