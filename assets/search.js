@@ -72,6 +72,7 @@ function ReadMore(element) {
     };
     ReadMoreQuit();
     $(".read-more-page").show();
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 500);
 }
 function ReadMoreQuit() {
 
